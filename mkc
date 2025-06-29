@@ -1,0 +1,6 @@
+
+rm -f wsb.oc.log
+rm -f wsb.o
+rm -f wstbld.exe
+rm -f wstbld
+rm -fr dest sync
