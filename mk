@@ -6,7 +6,7 @@ if [ -z "${1}" ]; then
 	if [ -z "${m32}" ]; then
 		o wsb.oc underscore_pref 1 include_sec 1 ${OFLAGS} ${OFLAGSEXTRA} && \
 		ounused wsb.oc.log && \
-		${LD} ${linkerflags} wsb.o -entry main --dynamic-linker=/lib64/ld-linux-x86-64.so.2 -o ${p} -lc
+		${LD} ${linkerflags} wsb.o -entry main --dynamic-linker=/lib64/ld-linux-x86-64.so.2 --build-id -o ${p} -lc  #--build-id for rpm
 	else
 		o wsb.oc underscore_pref 1 include_sec 1 conv_64 1 ${OFLAGS} ${OFLAGSEXTRA} && \
 		ounused wsb.oc.log && \

@@ -1,6 +1,10 @@
 
 p=wstbld
 
+ifndef prefix
+prefix=/usr
+endif
+
 all: ${p}
 ${p}:
 	RUN__SHELL=$(SHELL) . ./shl && $${RUN__SHELL} ./mk
