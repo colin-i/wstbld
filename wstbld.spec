@@ -2,7 +2,7 @@
 %global _debugsource_template %{nil}
 
 Name: wstbld
-Version: 1
+Version: 1.1
 Release: 0
 License: GPLv3
 Summary: web site builder
@@ -29,3 +29,6 @@ linkerflags="-O3 -g" make  # -g here is important if wanting to have debuginfo p
 
 #-- CHANGELOG -----------------------------------------------------------------#
 %changelog
+* Sun Jun 29 2025 Costin Botescu <costin.botescu@gmail.com> 1.1-0
+- new package built with tito
+
