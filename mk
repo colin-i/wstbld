@@ -2,11 +2,16 @@
 if [ -z "${linkerflags}" ]; then linkerflags="-O3 -s"; fi
 p=wstbld
 if [ -z "${1}" ]; then
-	if [ -z "${LD}" ]; then LD=ld; fi
+	if [ -z "${LD}" ]; then
+		LD=ld
+	else
+		echo ld=${LD}
+	fi
 	if [ -z "${m32}" ]; then
+		echo 64bit
 		o wsb.oc underscore_pref 1 include_sec 1 ${OFLAGS} ${OFLAGSEXTRA} && \
 		ounused wsb.oc.log && \
-		${LD} ${linkerflags} wsb.o -entry main --dynamic-linker=/lib64/ld-linux-x86-64.so.2 --build-id -o ${p} -lc  #--build-id for rpm
+		${LD} ${linkerflags} wsb.o -entry main --dynamic-linker=/lib64/ld-linux-x86-64.so.2 --build-id -o ${p} -l:libc.so.6  #--build-id for rpm
 	else
 		o wsb.oc underscore_pref 1 include_sec 1 conv_64 1 ${OFLAGS} ${OFLAGSEXTRA} && \
 		ounused wsb.oc.log && \

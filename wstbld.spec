@@ -3,7 +3,7 @@
 
 Name: wstbld
 Version: 1.1
-Release: 0
+Release: 1
 License: GPLv3
 Summary: web site builder
 Url: https://github.com/colin-i/wstbld
@@ -29,6 +29,9 @@ linkerflags="-O3 -g" make  # -g here is important if wanting to have debuginfo p
 
 #-- CHANGELOG -----------------------------------------------------------------#
 %changelog
+* Sun Jun 29 2025 Costin Botescu <costin.botescu@gmail.com> 1.1-1
+- make passed LD
+
 * Sun Jun 29 2025 Costin Botescu <costin.botescu@gmail.com> 1.1-0
 - new package built with tito
 

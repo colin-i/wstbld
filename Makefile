@@ -7,7 +7,7 @@ endif
 
 all: ${p}
 ${p}:
-	RUN__SHELL=$(SHELL) . ./shl && $${RUN__SHELL} ./mk
+	RUN__SHELL=$(SHELL) . ./shl && LD=$(LD) $${RUN__SHELL} ./mk
 install:
 	install -D ${p} $(DESTDIR)$(prefix)/bin/${p}
 clean:
