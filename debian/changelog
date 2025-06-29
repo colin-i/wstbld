@@ -1,0 +1,6 @@
+wstbld (1-1) noble; urgency=low
+
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
+
+ -- Botescu Costin <costin.botescu@gmail.com>  Sun, 29 Jun 2025 10:54:53 +0300

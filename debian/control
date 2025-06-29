@@ -1,0 +1,14 @@
+Source: wstbld
+Section: utils
+Priority: optional
+Maintainer: Botescu Costin <costin.botescu@gmail.com>
+Build-Depends: debhelper-compat (= 13), ocompiler
+Standards-Version: 4.6.1
+Homepage: https://github.com/colin-i/wstbld
+Rules-Requires-Root: no
+
+Package: wstbld
+Architecture: amd64
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: command line web site packer with templates
