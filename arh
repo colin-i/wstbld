@@ -4,8 +4,9 @@ last=`curl https://api.github.com/repos/colin-i/wstbld/releases/latest -s | jq .
 ~/test/deb && \
 ~/test/publp && \
 ~/test/rel && \
+~/test/pkg/msys && \
 ~/test/pkg/onb && \
-~/test/pub pkg && \
+~/test/pub msys pkg && \
 exc=aarch64 ~/test/rpm/copr && \
 ~/test/rpm/suse && \
 ~/test/pkg/aur && \
