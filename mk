@@ -20,13 +20,20 @@ if [ -z "${1}" ]; then
 		${LD} ${linkerflags} -m elf_i386 wsb.o -entry main --dynamic-linker=/lib/ld-linux.so.2 -o ${p} -lc
 	fi
 else
-	if [ -z "${m32}" ]; then
-		o wsb.oc underscore_pref 1 inplace_reloc 0 conv_64 2 && \
-		ounused wsb.oc.log && \
-		x86_64-w64-mingw32-gcc-win32 ${linkerflags} wsb.o -o ${p}.exe
+	if [ -z "${CC}" ]; then
+		CC=gcc
 	else
-		o wsb.oc inplace_reloc 0 conv_64 1 && \
-		ounused wsb.oc.log && \
-		i686-w64-mingw32-gcc-win32 ${linkerflags} wsb.o -o ${p}.exe  #this is not working without uncommenting at win.oc
+		echo cc=${CC}
+	fi
+	if [ -z "${m32}" ]; then
+		${mount}o${ext} wsb.oc underscore_pref 1 inplace_reloc 0 ${OFLAGS} && \
+		${mount}ounused${ext} wsb.oc.log && \
+		${CC} ${linkerflags} wsb.o -o ${p}.exe
+		# x86_64-w64-mingw32-gcc-win32
+	else
+		${mount}o${ext} wsb.oc inplace_reloc 0 conv_64 1 && \
+		${mount}ounused${ext} wsb.oc.log && \
+		${CC} ${linkerflags} wsb.o -o ${p}.exe  #this is not working without uncommenting at win.oc
+		# i686-w64-mingw32-gcc-win32
 	fi
 fi

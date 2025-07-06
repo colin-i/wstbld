@@ -1,0 +1,6 @@
+
+if [ -z "$1" ]; then
+	CC=x86_64-w64-mingw32-gcc-win32 OFLAGS="conv_64 2" ./mk 1
+else
+	CC=i686-w64-mingw32-gcc-win32 m32=x ./mk 1
+fi

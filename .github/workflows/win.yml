@@ -1,0 +1,23 @@
+
+curl https://api.github.com/repos/colin-i/o/releases/latest -s > 1
+a="`cat 1 | jq ".assets[] | .name"`"
+i=0
+for b in ${a}; do
+ b=${b:1:-1}
+ if [ $b = ocompiler.windows.zip ]; then
+  break
+ fi
+ i=$((i+1))
+done
+b="`cat 1 | jq .assets[${i}].browser_download_url`"
+b=${b:1:-1}
+wget $b -O 1
+unzip 1
+rm 1
+
+mount=./ocompiler/ ext=.exe ./mk 1
+a=`./wstbld.exe | head -1`
+if [ $a != 'USAGE: wstbld file' ]; then
+ echo test error
+ exit 1
+fi
