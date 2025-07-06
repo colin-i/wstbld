@@ -1,23 +1,60 @@
+on:
+ workflow_dispatch:
+env:
+ #for gh/upload
+ GITHUB_TOKEN: ${{ secrets.PAT }}
+jobs:
+ msys:
+  runs-on: windows-latest
+  steps:
+   - uses: msys2/setup-msys2@v2
+     id: msys2
+     with:
+      msystem: mingw64
+      install: zip unzip
+      pacboy: jq:p gcc:p binutils:p
+      #                  objdump
+   - uses: actions/checkout@master
+   - name: pkgbuild
+     shell: msys2 {0}
+     run: |
+      curl https://api.github.com/repos/colin-i/o/releases/latest -s > 1
+      a="`cat 1 | jq '.assets[] | .name'`"
+      i=0
+      for b in ${a}; do
+       b=${b:1:-1}
+       if [ $b = ocompiler.windows.zip ]; then
+        break
+       fi
+       i=$((i+1))
+      done
+      b="`cat 1 | jq .assets[${i}].browser_download_url`"
+      b=${b:1:-1}
+      wget $b -O 1
+      unzip 1
+      rm 1
 
-curl https://api.github.com/repos/colin-i/o/releases/latest -s > 1
-a="`cat 1 | jq ".assets[] | .name"`"
-i=0
-for b in ${a}; do
- b=${b:1:-1}
- if [ $b = ocompiler.windows.zip ]; then
-  break
- fi
- i=$((i+1))
-done
-b="`cat 1 | jq .assets[${i}].browser_download_url`"
-b=${b:1:-1}
-wget $b -O 1
-unzip 1
-rm 1
+      name=`cat debian/control | grep ^Source | grep -o [^\ ]*$`
 
-mount=./ocompiler/ ext=.exe ./mk 1
-a=`./wstbld.exe | head -1`
-if [ $a != 'USAGE: wstbld file' ]; then
- echo test error
- exit 1
-fi
+      mount=./ocompiler/ ext=.exe ./mk 1
+      objdump -p ${name}.exe | grep 'DLL Name'
+      a=`./${name}.exe | head -1` || echo testing
+      if [ "$a" != USAGE:" ${name} "file$'\r' ]; then
+       echo test error: $a
+       exit 1
+      fi
+      file=${name}.windows.zip
+      zip ${file} ${name}.exe
+      unzip -l ${file}
+      echo file="${file}" >> $GITHUB_ENV
+
+      tag=`curl -s https://api.github.com/repos/colin-i/${name}/releases/latest | jq .tag_name`
+      tag=${tag:1:-1}
+      echo ${tag}
+      echo tag="${tag}" >> $GITHUB_ENV
+   - name: Upload Release Asset
+     uses: svenstaro/upload-release-action@master
+     with:
+      file: ./${{ env.file }}
+      asset_name: ${{ env.file }}
+      tag: ${{ env.tag }}
