@@ -251,7 +251,7 @@ function str_compare(ss str1,ss str2)
         return 2
     endif
     sd compare
-    setcall compare memcmp(str1,str2,sz1)
+    setcall compare memcmp(str1,str2,sz1) #int
     return compare
 endfunction
 
@@ -357,23 +357,19 @@ function common_path_ex(sd dirname,sd basename,sv psize)
 end
 #filepath
 function common_path(sd dirname,sd basename)
-	sd p;setcall p common_path_ex(dirname,basename,(NULL))
-	return p
+	callret common_path_ex(dirname,basename,(NULL))
 end
 #filepath
 function src_path(ss filename)
 	sd src
 	setcall src src_folder()
-	sd p;set p common_path(src,filename)
-	return p
+	callret common_path(src,filename)
 endfunction
 #file
 function src_open(ss filename)
     ss path
     setcall path src_path(filename)
-    sd file
-    setcall file file_open(path,"rb")
-    return file
+	callret file_open(path,"rb")
 endfunction
 
 function template_string()
@@ -383,9 +379,7 @@ endfunction
 function template_string_length()
     ss t_str
     setcall t_str template_string()
-    sd sz
-    setcall sz strlen(t_str)
-    return sz
+	callret strlen(t_str) #still long long at windows
 endfunction
 
 function src_get_template(ss filename,sv containers)
@@ -672,9 +666,7 @@ function file_open_folders_between(ss filename,sd bigsize,ss smallsize)
 			set smallsize# (asciislash)
 		end
 	end
-	sd file
-	setcall file file_open(filename,"wb")
-	return file
+	callret file_open(filename,"wb")
 end
 
 function sync_src_fn(ss filename,sd mem,sd len)
