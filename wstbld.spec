@@ -2,7 +2,7 @@
 %global _debugsource_template %{nil}
 
 Name: wstbld
-Version: 1.2
+Version: 1.3
 Release: 0
 License: GPLv3
 Summary: web site builder
@@ -29,6 +29,12 @@ linkerflags="-O3 -g" make  # -g here is important if wanting to have debuginfo p
 
 #-- CHANGELOG -----------------------------------------------------------------#
 %changelog
+* Thu Jul 24 2025 Costin Botescu <costin.botescu@gmail.com> 1.3-0
+- callret (costin.botescu@gmail.com)
+- msys flow (costin.botescu@gmail.com)
+- win asset (costin.botescu@gmail.com)
+- delrel (costin.botescu@gmail.com)
+
 * Sun Jul 06 2025 Costin Botescu <costin.botescu@gmail.com> 1.2-0
 - wstbld (costin.botescu@gmail.com)
 - pkg ocompiler (costin.botescu@gmail.com)
