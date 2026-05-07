@@ -28,11 +28,11 @@ simple.container
 html.container
     no_ad.container
         donations.html
-        #this will change to or make folder programs, and then index.php
+        #this will change to or make folder prezentare, and then index.php
         prezentare.dir
             #here is index.php
         ..
-        #back from programs to dest folder
+        #back from prezentare to dest folder
     !
 !
 main.container
@@ -87,7 +87,7 @@ main.container
                 ..
             ..
 missing.php
-    #.container if in a replacement is like a file
+    #.container if in a replacement is like a file. replacements can have multiple <!-- -->
     main.container
         html.container
             404.php
