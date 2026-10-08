@@ -8,3 +8,5 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - uses: colin-i/test/.github/actions/rel@main
+     with:
+      store_id: ''
