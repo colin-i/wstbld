@@ -6,6 +6,6 @@ The rest of the file is the site map. Example and information in "files.txt" .
 There is also a ".wsb.log" file at the user home folder.
 Having versions for: ubuntu: noble/resolute amd64
                     opensuse: leap: 15.6 i586/x86_64, 16 x86_64; tumbleweed: i586 x86_64
-                    fedora: 42/43/44 x86_64
+                    fedora: 42/43/44/45 x86_64
                     arch
                     windows
